@@ -30,16 +30,22 @@ public class SeznamSlov {
         File file = new File("syn2010_lemma_cba.txt");
         String string;
         try {
-            Scanner sc = new Scanner(file); //creates new scanner object
+            Scanner sc = new Scanner(file,  "windows-1250"); //creates new scanner object
             while (sc.hasNextLine()) { //loops if scanner finds text on line
                 string = sc.findInLine("[a-zA-Z]+"); //saves next string
+
                 if (filter(string)) {
-//                    sc.findInLine("[0-9]+");
+                    string = sc.findInLine("[\\d]+");
+                    sc.nextLine();
                     continue;
                 }
+
+
                 String out = transScriptor(string); //saves transcription to string s
+
                 System.out.println(out);
-//                sc.findInLine("[0-9]+");
+                string = sc.findInLine("[\\d]+");
+                sc.nextLine();
             }
             sc.close(); //scanner closes file
         } catch (FileNotFoundException sce) {
