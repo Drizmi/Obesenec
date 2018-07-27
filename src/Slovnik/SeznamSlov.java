@@ -8,6 +8,13 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 public class SeznamSlov {
+    private static int filter(String s) {
+        if (s.length() < 3) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
     private static String transScriptor(String s) {
         s.toLowerCase(); //changes string to lowercase
         Normalizer.normalize(s, Normalizer.Form.NFD); //normalizes string
@@ -26,8 +33,11 @@ public class SeznamSlov {
                 Formatter f = new Formatter("C:\\Tutorial\\Obesenec\\src\\Slovnik\\seznam.txt"); //creates new file
 
                 while (sc.hasNextLine()) { //loops if scanner finds text on line
-
-                    String s = transScriptor(sc.findInLine()); //saves transcription to string s
+                    switch (filter(sc.findInLine(sc.nextLine()))) {
+                        case 0:
+                            
+                    }
+                    String s = transScriptor(sc.findInLine(sc.nextLine())); //saves transcription to string s
                     f.format("%s", s + "\r\n"); //saves transcription to file
 
                 }
