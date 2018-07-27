@@ -27,6 +27,7 @@ public class SeznamSlov {
     public static List<String> makeList() {
         File file = new File("syn2010_lemma_cba.txt");
         List<String> l = new LinkedList();
+        String test = "Hi";
         try {
             Scanner sc = new Scanner(file, "windows-1250"); //creates new scanner object
             while (sc.hasNextLine()) { //loops if scanner finds text on line
@@ -37,8 +38,7 @@ public class SeznamSlov {
                     continue;
                 }
                 String out = transScriptor(string); //saves transcription to string s
-                l.add(out);
-
+                    l.add(out);
 
                 string = sc.findInLine("[\\d]+"); //finds numbers in line
                 sc.nextLine();
