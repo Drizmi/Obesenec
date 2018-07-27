@@ -8,48 +8,49 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 public class SeznamSlov {
-    private static boolean filter(String s) { //if string is only 3 characters long returns 0
-        if (s.length() < 3) {
+    private static boolean filter(String s) { //if string is only 3 characters long returns true
+        if (s.length() <= 3) {
             return true;
         }
         return false;
     }
+
     private static String transScriptor(String s) {
-        s.toLowerCase(); //changes string to lowercase
-        Normalizer.normalize(s, Normalizer.Form.NFD); //normalizes string
-        s.replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with ""
+        s.toLowerCase(); //changes string to lowercase !!!NEFUNGUJE!!!
+        Normalizer.normalize(s, Normalizer.Form.NFD); //normalizes string !!!NEFUNGUJE!!!
+        s.replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with "" !!!NEFUNGUJE!!!
 //        char[] arr = s.toCharArray();
 //        for (char el: arr) {
 //
 //        }
         return s;
     }
+
     public static void makeList() {
-        File file = new File("C:\\Tutorial\\Obesenec\\src\\Slovnik\\syn2010_lemma_cba.txt");
+        File file = new File("syn2010_lemma_cba.txt");
+        String string;
         try {
             Scanner sc = new Scanner(file); //creates new scanner object
-            try {
-                Formatter f = new Formatter("C:\\Tutorial\\Obesenec\\src\\Slovnik\\seznam.txt"); //creates new file
-
-                while (sc.hasNextLine()) { //loops if scanner finds text on line
-                    while (filter(sc.findInLine(sc.nextLine()))) {
-                        sc.nextLine();
-                    }
-                    String s = transScriptor(sc.findInLine(sc.nextLine())); //saves transcription to string s
-                    f.format("%s", s + "\r\n"); //saves transcription to file
-
+            while (sc.hasNextLine()) { //loops if scanner finds text on line
+                sc.findInLine("     "); //jumps after next " " !!!NEFUNGUJE!!!
+                string = sc.next(); //saves next token to string
+                if (filter(string)) {
+                    sc.findInLine("     "); //!!!NEFUNGUJE!!!
+                    continue;
                 }
-                sc.close(); //scanner closes file
-            } catch (FileNotFoundException sce) {
-                sce.printStackTrace();
+                String out = transScriptor(string); //saves transcription to string s
+                System.out.println(out);
+                sc.findInLine("     "); //!!!NEFUNGUJE!!!
             }
-        } catch (Exception fe) {
-            System.out.println("Error");
+            sc.close(); //scanner closes file
+        } catch (FileNotFoundException sce) {
+            System.out.println("File not found");
+            sce.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-
+        makeList();
 //        if(file.exists()) {
 //            System.out.println(file.getName() +  " exists!");
 //        }
