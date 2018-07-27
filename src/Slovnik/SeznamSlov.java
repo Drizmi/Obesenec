@@ -50,13 +50,8 @@ public class SeznamSlov {
     }
 
     public static void main(String[] args) {
-        int i = 0;
-        for (String el : makeList()) {
-            i++;
-            System.out.println(el);
-            if (i > 10) {
-                break;
-            }
-        }
+        makeList();
     }
 }
+
+
