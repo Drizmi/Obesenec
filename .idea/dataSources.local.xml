@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="jdbc:hsqldb:file:C:/Users/xxdrizgmic/IdeaProjects/Obesenec/src/Slovnik\syn2010_lemma_cba.txt/" uuid="45f5b991-110b-42df-bf36-519de5a8cb63">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+    </data-source>
+  </component>
+</project>
