@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class SeznamSlov {
     private static boolean filter(String s) { //if string is only 3 characters long returns true
-        if (s.length() <= 3) {
+        if (s.length() <= 3 ) {
             return true;
         }
         return false;
@@ -32,15 +32,14 @@ public class SeznamSlov {
         try {
             Scanner sc = new Scanner(file); //creates new scanner object
             while (sc.hasNextLine()) { //loops if scanner finds text on line
-                sc.findInLine("     "); //jumps after next " " !!!NEFUNGUJE!!!
-                string = sc.next(); //saves next token to string
+                string = sc.findInLine("[a-zA-Z]+"); //saves next string
                 if (filter(string)) {
-                    sc.findInLine("     "); //!!!NEFUNGUJE!!!
+//                    sc.findInLine("[0-9]+");
                     continue;
                 }
                 String out = transScriptor(string); //saves transcription to string s
                 System.out.println(out);
-                sc.findInLine("     "); //!!!NEFUNGUJE!!!
+//                sc.findInLine("[0-9]+");
             }
             sc.close(); //scanner closes file
         } catch (FileNotFoundException sce) {
