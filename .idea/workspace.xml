@@ -42,8 +42,8 @@
       <file leaf-file-name="SeznamSlov.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Slovnik/SeznamSlov.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="476">
+              <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
               <folding>
                 <element signature="e#266#305#0" />
                 <element signature="method#main#0;class#SeznamSlov#0" />
@@ -221,12 +221,12 @@
       <updated>1532677797603</updated>
       <workItem from="1532677801998" duration="2553000" />
       <workItem from="1532680451870" duration="77000" />
-      <workItem from="1532680533386" duration="14291000" />
+      <workItem from="1532680533386" duration="14579000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16921000" />
+    <option name="totallyTimeSpent" value="17209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1672" y="-8" width="1936" height="1176" extended-state="6" />
@@ -241,19 +241,19 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32987747" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22525918" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22525918" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21875" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39396796" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39396796" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -597,6 +597,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/syn2010_lemma_cba.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="15" lean-forward="true" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -608,17 +615,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/syn2010_lemma_cba.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="15" lean-forward="true" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Slovnik/SeznamSlov.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="476">
+          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
           <folding>
             <element signature="e#266#305#0" />
             <element signature="method#main#0;class#SeznamSlov#0" />

@@ -32,10 +32,9 @@ public class SeznamSlov {
         try {
             Scanner sc = new Scanner(file,  "windows-1250"); //creates new scanner object
             while (sc.hasNextLine()) { //loops if scanner finds text on line
-                string = sc.findInLine("[a-zA-Z]+"); //saves next string
-
+                string = sc.findInLine("[\\p{IsLatin}]+"); //saves next string
                 if (filter(string)) {
-                    string = sc.findInLine("[\\d]+");
+                    string = sc.findInLine("[\\d]+"); //finds numbers in line
                     sc.nextLine();
                     continue;
                 }
@@ -44,7 +43,7 @@ public class SeznamSlov {
                 String out = transScriptor(string); //saves transcription to string s
 
                 System.out.println(out);
-                string = sc.findInLine("[\\d]+");
+                string = sc.findInLine("[\\d]+"); //finds numbers in line
                 sc.nextLine();
             }
             sc.close(); //scanner closes file
