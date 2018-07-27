@@ -8,10 +8,10 @@ import java.util.Scanner;
 import static Slovnik.SeznamSlov.makeList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void welcome() {
         Scanner sc = new Scanner(System.in);
-        int i = 1;
-        while (i < 100) {
+        int q = 0;
+        while (q != 1) {
             System.out.println("Wan to play a Hangman ? yes/no");
             String answer = sc.nextLine();
             if (answer.equals(new String("no"))) {
@@ -19,13 +19,16 @@ public class Main {
                 break;
             } else if (answer.equals(new String("yes"))) {
                 System.out.println("Let's begin.");
-                break;
+                System.out.println("Goodbye.");
             } else {
                 System.out.println(answer + " is not a valid command.");
-                i++;
             }
             continue;
         }
-        System.out.println("Ok that's enough.");
+    }
+
+    public static void main(String[] args) {
+        welcome();
+
     }
 }
