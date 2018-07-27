@@ -8,10 +8,11 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 public class SeznamSlov {
-    private static int filter(String s) { //if string is only 3 characters long returns 0
+    private static boolean filter(String s) { //if string is only 3 characters long returns 0
         if (s.length() < 3) {
             return true;
         }
+        return false;
     }
     private static String transScriptor(String s) {
         s.toLowerCase(); //changes string to lowercase
