@@ -4,10 +4,7 @@ package Slovnik;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.Normalizer;
-import java.util.Formatter;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class SeznamSlov {
     private static boolean filter(String s) { //if string is only 3 characters long returns true
@@ -23,11 +20,11 @@ public class SeznamSlov {
                 .replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with "" !!!NEFUNGUJE!!!
     }
 
-
-    public static List<String> makeList() {
+    public static Set<String> makeList() {
         File file = new File("syn2010_lemma_cba.txt");
-        List<String> l = new LinkedList();
+        Set<String> set = new LinkedHashSet<String>();
         String test = "Hi";
+        int i = 0;
         try {
             Scanner sc = new Scanner(file, "windows-1250"); //creates new scanner object
             while (sc.hasNextLine()) { //loops if scanner finds text on line
@@ -37,8 +34,9 @@ public class SeznamSlov {
                     sc.nextLine();
                     continue;
                 }
+
                 String out = transScriptor(string); //saves transcription to string s
-                    l.add(out);
+                set.add(out);
 
                 string = sc.findInLine("[\\d]+"); //finds numbers in line
                 sc.nextLine();
@@ -48,7 +46,7 @@ public class SeznamSlov {
             System.out.println("File not found");
             sce.printStackTrace();
         }
-        return l;
+        return set;
     }
 
     public static void main(String[] args) {
