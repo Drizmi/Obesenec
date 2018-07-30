@@ -13,13 +13,11 @@ public class SeznamSlov {
         }
         return false;
     }
-
     private static String transScriptor(String s) {
         s = s.toLowerCase(); //changes string to lowercase !!!NEFUNGUJE!!!
         return Normalizer.normalize(s, Normalizer.Form.NFD) //normalizes string !!!NEFUNGUJE!!!
                 .replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with "" !!!NEFUNGUJE!!!
     }
-
     public static Set<String> makeList() {
         File file = new File("syn2010_lemma_cba.txt");
         Set<String> set = new LinkedHashSet<String>();
@@ -49,8 +47,18 @@ public class SeznamSlov {
         return set;
     }
 
+//    public static String chooseRandom(Set s) {
+//
+//    }
+
     public static void main(String[] args) {
-        makeList();
+        Set s = makeList();
+
+        Random rand = new Random();
+        int rnum = rand.nextInt(s.size());
+        for (String el: s)
+        System.out.println();
+
     }
 }
 

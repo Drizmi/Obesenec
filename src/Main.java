@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.Random;
 
 import static Slovnik.SeznamSlov.makeList;
 
@@ -29,6 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
         welcome();
+
 
     }
 }
