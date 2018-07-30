@@ -32,14 +32,12 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+            <state relative-caret-position="374">
+              <caret line="116" column="16" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
               <folding>
                 <element signature="method#welcome#0;class#Main#0" />
+                <element signature="method#chooseDifficulty#0;class#Main#0" />
                 <element signature="method#wordGenerator#0;class#Main#0" />
-                <element signature="method#playSwitch#0;class#Main#0" />
-                <element signature="method#guessing#0;class#Main#0" />
-                <element signature="method#hideWord#0;class#Main#0" />
               </folding>
             </state>
           </provider>
@@ -234,12 +232,12 @@
       <workItem from="1532701447636" duration="1509000" />
       <workItem from="1532926827538" duration="30191000" />
       <workItem from="1532960189338" duration="79000" />
-      <workItem from="1532963375353" duration="1294000" />
+      <workItem from="1532963375353" duration="2669000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55055000" />
+    <option name="totallyTimeSpent" value="56430000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1672" y="-8" width="1936" height="1176" extended-state="6" />
@@ -289,55 +287,55 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>118</line>
+          <line>138</line>
           <properties />
           <option name="timeStamp" value="329" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>131</line>
+          <line>151</line>
           <properties />
           <option name="timeStamp" value="330" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>132</line>
+          <line>152</line>
           <properties />
           <option name="timeStamp" value="331" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>129</line>
+          <line>149</line>
           <properties />
           <option name="timeStamp" value="332" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>126</line>
+          <line>146</line>
           <properties />
           <option name="timeStamp" value="334" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>125</line>
+          <line>145</line>
           <properties />
           <option name="timeStamp" value="335" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>127</line>
+          <line>147</line>
           <properties />
           <option name="timeStamp" value="336" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>128</line>
+          <line>148</line>
           <properties />
           <option name="timeStamp" value="337" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>130</line>
+          <line>150</line>
           <properties />
           <option name="timeStamp" value="338" />
         </line-breakpoint>
@@ -355,10 +353,8 @@
           <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
           <folding>
             <element signature="method#welcome#0;class#Main#0" />
+            <element signature="method#chooseDifficulty#0;class#Main#0" />
             <element signature="method#wordGenerator#0;class#Main#0" />
-            <element signature="method#playSwitch#0;class#Main#0" />
-            <element signature="method#guessing#0;class#Main#0" />
-            <element signature="method#hideWord#0;class#Main#0" />
           </folding>
         </state>
       </provider>
@@ -499,14 +495,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+        <state relative-caret-position="374">
+          <caret line="116" column="16" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
           <folding>
             <element signature="method#welcome#0;class#Main#0" />
+            <element signature="method#chooseDifficulty#0;class#Main#0" />
             <element signature="method#wordGenerator#0;class#Main#0" />
-            <element signature="method#playSwitch#0;class#Main#0" />
-            <element signature="method#guessing#0;class#Main#0" />
-            <element signature="method#hideWord#0;class#Main#0" />
           </folding>
         </state>
       </provider>

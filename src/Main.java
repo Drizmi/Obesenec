@@ -20,27 +20,26 @@ public class Main {
     private static char[] w1arr;
 
     private static int welcome() {
-        String y = "yes", n = "no";
         do {
             System.out.println("Want to play a Hangman ? yes/no");
-            answer = sc.nextLine();
-            if (answer.equals(y)) {
-                System.out.println("Here is your word:");
-                return 16;
-            } else if (answer.equals(n)) {
-                return -1;
-            } else {
-                System.out.println(answer + " is not a valid command.");
-                enough++;
+            switch (answer = sc.nextLine()) {
+                case "yes":
+                    System.out.println("Here is your word:");
+                    return 16;
+                case "no":
+                    return -1;
+                default:
+                    System.out.println(answer + " is not a valid command.");
+                    enough++;
             }
         } while (enough < 100);
         return -2;
     }
 
-    private static int chooseDifficulty () {
+    private static int chooseDifficulty() {
         System.out.println("Choose your difficulty (easy/medium/hard):");
         answer = sc.nextLine();
-        
+
         return difficulty;
     }
 
@@ -51,58 +50,81 @@ public class Main {
     }
 
     private static int playSwitch(int play) {
-        Scanner sc = new Scanner(System.in);
-        String a = "again", n = "next", q = "quit", yes = "yes", no = "no";
-        if (play == 2 || play == 3) {
-            if (play == 3) {
+        switch (play) {
+            case 3:
                 System.out.println("Congratulation, the word you were guessing was " + w0 + " type 'next' for another round or 'quit' for exit");
-            } else {
+                break;
+            case 2:
                 System.out.println("Too bad, you are out of tries. The word you were guessing was " + w0);
                 System.out.println("If you want to try again, type 'again'. If you want to quit, type 'quit'.");
-            }
-            answer = sc.next();
-            if (answer.equals(n) || answer.equals(a)) {
-                play = 16;
-            } else if (answer.equals(q)) {
-                play = -1;
-            } else {
-                System.out.println(answer + " is not a valid command.");
-                ++enough;
-                if (enough == 100) {
-                    play = -2;
-                }
-            }
-        } else if (play == 1) {
-            System.out.println("So you want to play ? yes/no");
-            answer = sc.next();
-            if (answer.equals(no)) {
-                play = -1;
-            } else if (answer.equals(yes)) {
-                play = 16;
-            } else {
-                System.out.println(answer + " is not a valid command.");
-                ++enough;
-                if (enough == 100) {
-                    play = -2;
-                }
-            }
-        } else if (play == -1) {
-            System.out.println("Do you really want to quit? yes/no");
-            answer = sc.next();
-            if (answer.equals(yes)) {
+                break;
+//                answer = sc.next();
+//                if (answer.equals(n) || answer.equals(a)) {
+//                    play = 16;
+//                } else if (answer.equals(q)) {
+//                    play = -1;
+//                } else {
+//                    System.out.println(answer + " is not a valid command.");
+//                    ++enough;
+//                    if (enough == 100) {
+//                        play = -2;
+//                    }
+//                }
+            case 1:
+                System.out.println("So you want to play ? yes/no");
+                break;
+//                answer = sc.next();
+//                if (answer.equals(no)) {
+//                    play = -1;
+//                } else if (answer.equals(yes)) {
+//                    play = 16;
+//                } else {
+//                    System.out.println(answer + " is not a valid command.");
+//                    ++enough;
+//                    if (enough == 100) {
+//                        play = -2;
+//                    }
+//                }
+            case -1:
+                System.out.println("Do you really want to quit? y/n");
+//                answer = sc.next();
+//                if (answer.equals(yes)) {
+//                    play = 0;
+//                } else if (answer.equals(no))
+//                    play = 1;
+                break;
+
+            case -2:
+                System.out.println("That's enough, you are annoying !!");
                 play = 0;
-            } else if (answer.equals(no)) {
-                play = 1;
-            } else {
+                break;
+
+            default:
                 System.out.println(answer + " is not a valid command.");
                 ++enough;
                 if (enough == 100) {
                     play = -2;
                 }
-            }
-        } else if (play == -2) {
-            System.out.println("That's enough, you are annoying !!");
-            play = 0;
+                break;
+        }
+        switch (answer = sc.next()) {
+            case "yes":
+            case "again":
+            case "next":
+                play = 16;
+                break;
+            case "quit":
+            case "no":
+                play = -1;
+                break;
+            case "y":
+                play = 0;
+                break;
+            case "n":
+                play = 1;
+                break;
+            default:
+                break;
         }
         return play;
     }
