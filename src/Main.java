@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.util.Set;
 
 import static Slovnik.SeznamSlov.*;
 
@@ -9,7 +10,9 @@ public class Main {
     private static String w2;
     private static String answer;    //input
     private static int tries;    //number of tries
+    private static Set<String> set;
     public static int play;
+    private static int difficulty;
     private static int enough = 0;
     public static int i;
     public static char[] word;  //array of charracters from word w0
@@ -34,8 +37,15 @@ public class Main {
         return -2;
     }
 
+    private static int chooseDifficulty () {
+        System.out.println("Choose your difficulty (easy/medium/hard):");
+        answer = sc.nextLine();
+        
+        return difficulty;
+    }
+
     private static void wordGenerator() {
-        w0 = chooseRandom(makeSet());
+        w0 = chooseRandom(set);
         word = (w0).toCharArray();   //array of characters of word
         w1 = hideWord(word);  //word in format _ _ _ _ _ ...
     }
@@ -118,18 +128,12 @@ public class Main {
                     for (char el : guess) {
                         int index = w0.indexOf(el);
                         while (index >= 0) {
-                            word[index] = '_';
                             w1arr = w1.toCharArray();
                             w1arr[((index * 2) + 1)] = el;
                             w1 = new String(w1arr);
                             index = w0.indexOf(el, index + 1);
                         }
                     }
-                } else if (answer.equals(w0)) {
-                    System.out.println("Well done, the word you were guessing was " + w0 + ".");
-                    System.out.println("Your score is: " + tries);
-                    play = 3;
-                    break;
                 } else if (answer.length() == 1 && !w0.contains(answer)) {
                     System.out.println("Wrong, " + answer + " is not in the word you are guessing.");
                     --tries;
@@ -141,6 +145,8 @@ public class Main {
                 }
             } else {
                 play = 3;
+                System.out.println("Well done, the word you were guessing was " + w0 + ".");
+                System.out.println("Your score is: " + tries);
             }
         }
         return play;
@@ -155,7 +161,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        set = makeSet();
         play = welcome();
+        difficulty = chooseDifficulty();
         while (play != 0) {
             while (play == 16) {
                 play = guessing(tries, play);
