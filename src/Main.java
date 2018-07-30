@@ -1,36 +1,42 @@
 
-import java.io.File;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.Random;
-
-import static Slovnik.SeznamSlov.makeList;
+import static Slovnik.SeznamSlov.*;
 
 public class Main {
-    public static void welcome() {
+    public static int welcome() {
         Scanner sc = new Scanner(System.in);
-        int q = 0;
-        while (q != 1) {
+        int i = 0;
+        do {
             System.out.println("Wan to play a Hangman ? yes/no");
             String answer = sc.nextLine();
-            if (answer.equals(new String("no"))) {
+            if (answer.equals(new String("yes"))) {
+                System.out.println("Here is your word:");
+                return 1;
+            } else if (answer.equals(new String("no"))) {
                 System.out.println("Too bad.");
-                break;
-            } else if (answer.equals(new String("yes"))) {
-                System.out.println("Let's begin.");
-                System.out.println("Goodbye.");
+                return 0;
             } else {
                 System.out.println(answer + " is not a valid command.");
+                i++;
             }
-            continue;
+        } while (i < 100);
+        return 0;
+    }
+
+    public static char[] hideWord(char[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = '_';
         }
+        return arr;
     }
 
     public static void main(String[] args) {
-        welcome();
+        if (welcome() == 1) {
+            char[] chars = (chooseRandom(makeSet())).toCharArray();
+            char[] hiddenchars = (hideWord(chars));
+            System.out.println(hiddenchars);
+        } else {
 
-
+        }
     }
 }
