@@ -1,30 +1,77 @@
 
-import java.util.Scanner;
-import java.util.Set;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.Normalizer;
+import java.util.*;
 
-import static Slovnik.SeznamSlov.*;
 
 public class Main {
     public static String w0;    //guessing word
     private static String w1 = "";    //word as  _ _ _ _ _ ...
-    private static String w2;
     private static String answer;    //input
-    private static int tries;    //number of tries
-    private static Set<String> set;
+    private static Set<String> set = makeSet();
     public static int play;
     private static int difficulty;
     private static int enough = 0;
-    public static int i;
     public static char[] word;  //array of charracters from word w0
     public static Scanner sc = new Scanner(System.in);
-    private static char[] w1arr;
+    public static Iterator<String> it = set.iterator();
+
+    private static boolean filter(String s) { //if string is only 3 characters long returns true
+        if (s.length() <= 3) return true;
+        else return false;
+    }
+
+    private static String transScriptor(String s) {
+        s = s.toLowerCase(); //changes string to lowercase !!!NEFUNGUJE!!!
+        return Normalizer.normalize(s, Normalizer.Form.NFD) //normalizes string !!!NEFUNGUJE!!!
+                .replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with "" !!!NEFUNGUJE!!!
+    }
+
+    private static Set<String> makeSet() {
+        File file = new File("syn2010_lemma_cba.txt");
+        Set<String> set = new LinkedHashSet<String>();
+        try {
+            Scanner sc = new Scanner(file, "windows-1250"); //creates new scanner object
+            while (sc.hasNextLine()) { //loops if scanner finds text on line
+                String string = sc.findInLine("[\\p{IsLatin}]+"); //saves next string
+                if (filter(string)) {
+                    sc.nextLine();
+                    continue;
+                }
+                String out = transScriptor(string); //saves transcription to string s
+                set.add(out);
+                sc.nextLine();
+            }
+            sc.close(); //scanner closes file
+        } catch (FileNotFoundException sce) {
+            System.out.println("File not found");
+            sce.printStackTrace();
+        }
+        return set;
+    }
+
+    private static String chooseRandom(Set s) {
+        Random rand = new Random(); //creates new RNG
+        int rnum = rand.nextInt(s.size()); //rolls random number
+        Iterator<String> it = s.iterator(); //creates new iterator
+        int i = 1; //counter set on 1 (1st element in set)
+        while (i != rnum && it.hasNext()) {
+            if (i == s.size()) {
+                break;
+            }
+            it.next();
+            i++;
+        }
+        String string = it.next();
+        return (string); //returns random element from set of strings
+    }
 
     private static int welcome() {
         do {
             System.out.println("Want to play a Hangman ? yes/no");
-            switch (answer = sc.nextLine()) {
+            switch (sc.nextLine()) {
                 case "yes":
-                    System.out.println("Here is your word:");
                     return 16;
                 case "no":
                     return -1;
@@ -38,13 +85,47 @@ public class Main {
 
     private static int chooseDifficulty() {
         System.out.println("Choose your difficulty (easy/medium/hard):");
-        answer = sc.nextLine();
-
-        return difficulty;
+        while (enough < 100) {
+            switch (sc.next()) {
+                case "easy":
+                    return 1;
+                case "medium":
+                    return 2;
+                case "hard":
+                    return 3;
+                default:
+                    ++enough;
+                    System.out.println("That is not an option.");
+            }
+        }
+        play = -2;
+        return 0;
     }
 
     private static void wordGenerator() {
+        int min = 0;
+        int max = 22;
+        int l = 0;
+        switch (difficulty) {
+            case 1:
+                min = 4;
+                max = 9;
+                break;
+            case 2:
+                min = 10;
+                max = 16;
+                break;
+            case 3:
+                min = 17;
+                max = 22;
+                break;
+        }
         w0 = chooseRandom(set);
+        l = w0.length();
+        while (min > l && l > max && it.hasNext()) {
+            w0 = it.next();
+            l = w0.length();
+        }
         word = (w0).toCharArray();   //array of characters of word
         w1 = hideWord(word);  //word in format _ _ _ _ _ ...
     }
@@ -129,11 +210,13 @@ public class Main {
         return play;
     }
 
-    private static int guessing(int tries, int play) {
+    private static int guessing(int play) {
+        int tries = 0;
         if (play == 16) {
+            difficulty = chooseDifficulty();
             tries = 16;
         }
-        while (tries > 0 && play != 3) {
+        while (tries > 0 && play != 3 && play != -2) {
             if (tries == 16) {
                 wordGenerator();
                 --tries;
@@ -150,7 +233,7 @@ public class Main {
                     for (char el : guess) {
                         int index = w0.indexOf(el);
                         while (index >= 0) {
-                            w1arr = w1.toCharArray();
+                            char[] w1arr = w1.toCharArray();
                             w1arr[((index * 2) + 1)] = el;
                             w1 = new String(w1arr);
                             index = w0.indexOf(el, index + 1);
@@ -176,19 +259,17 @@ public class Main {
 
     private static String hideWord(char[] arr) {
         String w = " ";
-        for (int t = 0; t < arr.length; t++) {
+        for (char el : arr) {
             w = w + "_ ";
         }
         return w;
     }
 
     public static void main(String[] args) {
-        set = makeSet();
         play = welcome();
-        difficulty = chooseDifficulty();
         while (play != 0) {
             while (play == 16) {
-                play = guessing(tries, play);
+                play = guessing(play);
             }
             play = playSwitch(play);
         }
