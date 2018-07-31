@@ -1,107 +1,222 @@
 
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.Normalizer;
+import java.util.*;
 
-import static Slovnik.SeznamSlov.*;
 
 public class Main {
     public static String w0;    //guessing word
     private static String w1 = "";    //word as  _ _ _ _ _ ...
-    private static String w2;
     private static String answer;    //input
-    private static int tries;    //number of tries
+    private static Set<String> set = makeSet();
     public static int play;
+    private static int difficulty;
     private static int enough = 0;
-    public static int i;
     public static char[] word;  //array of charracters from word w0
     public static Scanner sc = new Scanner(System.in);
-    private static char[] w1arr;
+    public static Iterator<String> it = set.iterator();
+
+    private static boolean filter(String s) { //if string is only 3 characters long returns true
+        if (s.length() <= 3) return true;
+        else return false;
+    }
+
+    private static String transScriptor(String s) {
+        s = s.toLowerCase(); //changes string to lowercase !!!NEFUNGUJE!!!
+        return Normalizer.normalize(s, Normalizer.Form.NFD) //normalizes string !!!NEFUNGUJE!!!
+                .replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with "" !!!NEFUNGUJE!!!
+    }
+
+    private static Set<String> makeSet() {
+        File file = new File("syn2010_lemma_cba.txt");
+        Set<String> set = new LinkedHashSet<String>();
+        try {
+            Scanner sc = new Scanner(file, "windows-1250"); //creates new scanner object
+            while (sc.hasNextLine()) { //loops if scanner finds text on line
+                String string = sc.findInLine("[\\p{IsLatin}]+"); //saves next string
+                if (filter(string)) {
+                    sc.nextLine();
+                    continue;
+                }
+                String out = transScriptor(string); //saves transcription to string s
+                set.add(out);
+                sc.nextLine();
+            }
+            sc.close(); //scanner closes file
+        } catch (FileNotFoundException sce) {
+            System.out.println("File not found");
+            sce.printStackTrace();
+        }
+        return set;
+    }
+
+    private static String chooseRandom(Set s) {
+        Random rand = new Random(); //creates new RNG
+        int rnum = rand.nextInt(s.size()); //rolls random number
+        Iterator<String> it = s.iterator(); //creates new iterator
+        int i = 1; //counter set on 1 (1st element in set)
+        while (i != rnum && it.hasNext()) {
+            if (i == s.size()) {
+                break;
+            }
+            it.next();
+            i++;
+        }
+        String string = it.next();
+        return (string); //returns random element from set of strings
+    }
 
     private static int welcome() {
-        String y = "yes", n = "no";
         do {
             System.out.println("Want to play a Hangman ? yes/no");
-            answer = sc.nextLine();
-            if (answer.equals(y)) {
-                System.out.println("Here is your word:");
-                return 16;
-            } else if (answer.equals(n)) {
-                return -1;
-            } else {
-                System.out.println(answer + " is not a valid command.");
-                enough++;
+            switch (sc.nextLine()) {
+                case "yes":
+                    return 16;
+                case "no":
+                    return -1;
+                default:
+                    System.out.println(answer + " is not a valid command.");
+                    enough++;
             }
         } while (enough < 100);
         return -2;
     }
 
+    private static int chooseDifficulty() {
+        System.out.println("Choose your difficulty (easy/medium/hard):");
+        while (enough < 100) {
+            switch (sc.next()) {
+                case "easy":
+                    return 1;
+                case "medium":
+                    return 2;
+                case "hard":
+                    return 3;
+                default:
+                    ++enough;
+                    System.out.println("That is not an option.");
+            }
+        }
+        play = -2;
+        return 0;
+    }
+
     private static void wordGenerator() {
-        w0 = chooseRandom(makeSet());
+        int min = 0;
+        int max = 22;
+        int l = 0;
+        switch (difficulty) {
+            case 1:
+                min = 4;
+                max = 9;
+                break;
+            case 2:
+                min = 10;
+                max = 16;
+                break;
+            case 3:
+                min = 17;
+                max = 22;
+                break;
+        }
+        w0 = chooseRandom(set);
+        l = w0.length();
+        while (min > l && l > max && it.hasNext()) {
+            w0 = it.next();
+            l = w0.length();
+        }
         word = (w0).toCharArray();   //array of characters of word
         w1 = hideWord(word);  //word in format _ _ _ _ _ ...
     }
 
     private static int playSwitch(int play) {
-        Scanner sc = new Scanner(System.in);
-        String a = "again", n = "next", q = "quit", yes = "yes", no = "no";
-        if (play == 2 || play == 3) {
-            if (play == 3) {
+        switch (play) {
+            case 3:
                 System.out.println("Congratulation, the word you were guessing was " + w0 + " type 'next' for another round or 'quit' for exit");
-            } else {
+                break;
+            case 2:
                 System.out.println("Too bad, you are out of tries. The word you were guessing was " + w0);
                 System.out.println("If you want to try again, type 'again'. If you want to quit, type 'quit'.");
-            }
-            answer = sc.next();
-            if (answer.equals(n) || answer.equals(a)) {
-                play = 16;
-            } else if (answer.equals(q)) {
-                play = -1;
-            } else {
-                System.out.println(answer + " is not a valid command.");
-                ++enough;
-                if (enough == 100) {
-                    play = -2;
-                }
-            }
-        } else if (play == 1) {
-            System.out.println("So you want to play ? yes/no");
-            answer = sc.next();
-            if (answer.equals(no)) {
-                play = -1;
-            } else if (answer.equals(yes)) {
-                play = 16;
-            } else {
-                System.out.println(answer + " is not a valid command.");
-                ++enough;
-                if (enough == 100) {
-                    play = -2;
-                }
-            }
-        } else if (play == -1) {
-            System.out.println("Do you really want to quit? yes/no");
-            answer = sc.next();
-            if (answer.equals(yes)) {
+                break;
+//                answer = sc.next();
+//                if (answer.equals(n) || answer.equals(a)) {
+//                    play = 16;
+//                } else if (answer.equals(q)) {
+//                    play = -1;
+//                } else {
+//                    System.out.println(answer + " is not a valid command.");
+//                    ++enough;
+//                    if (enough == 100) {
+//                        play = -2;
+//                    }
+//                }
+            case 1:
+                System.out.println("So you want to play ? yes/no");
+                break;
+//                answer = sc.next();
+//                if (answer.equals(no)) {
+//                    play = -1;
+//                } else if (answer.equals(yes)) {
+//                    play = 16;
+//                } else {
+//                    System.out.println(answer + " is not a valid command.");
+//                    ++enough;
+//                    if (enough == 100) {
+//                        play = -2;
+//                    }
+//                }
+            case -1:
+                System.out.println("Do you really want to quit? y/n");
+//                answer = sc.next();
+//                if (answer.equals(yes)) {
+//                    play = 0;
+//                } else if (answer.equals(no))
+//                    play = 1;
+                break;
+
+            case -2:
+                System.out.println("That's enough, you are annoying !!");
                 play = 0;
-            } else if (answer.equals(no)) {
-                play = 1;
-            } else {
+                break;
+
+            default:
                 System.out.println(answer + " is not a valid command.");
                 ++enough;
                 if (enough == 100) {
                     play = -2;
                 }
-            }
-        } else if (play == -2) {
-            System.out.println("That's enough, you are annoying !!");
-            play = 0;
+                break;
+        }
+        switch (answer = sc.next()) {
+            case "yes":
+            case "again":
+            case "next":
+                play = 16;
+                break;
+            case "quit":
+            case "no":
+                play = -1;
+                break;
+            case "y":
+                play = 0;
+                break;
+            case "n":
+                play = 1;
+                break;
+            default:
+                break;
         }
         return play;
     }
 
-    private static int guessing(int tries, int play) {
+    private static int guessing(int play) {
+        int tries = 0;
         if (play == 16) {
+            difficulty = chooseDifficulty();
             tries = 16;
         }
-        while (tries > 0 && play != 3) {
+        while (tries > 0 && play != 3 && play != -2) {
             if (tries == 16) {
                 wordGenerator();
                 --tries;
@@ -118,18 +233,12 @@ public class Main {
                     for (char el : guess) {
                         int index = w0.indexOf(el);
                         while (index >= 0) {
-                            word[index] = '_';
-                            w1arr = w1.toCharArray();
+                            char[] w1arr = w1.toCharArray();
                             w1arr[((index * 2) + 1)] = el;
                             w1 = new String(w1arr);
                             index = w0.indexOf(el, index + 1);
                         }
                     }
-                } else if (answer.equals(w0)) {
-                    System.out.println("Well done, the word you were guessing was " + w0 + ".");
-                    System.out.println("Your score is: " + tries);
-                    play = 3;
-                    break;
                 } else if (answer.length() == 1 && !w0.contains(answer)) {
                     System.out.println("Wrong, " + answer + " is not in the word you are guessing.");
                     --tries;
@@ -141,6 +250,8 @@ public class Main {
                 }
             } else {
                 play = 3;
+                System.out.println("Well done, the word you were guessing was " + w0 + ".");
+                System.out.println("Your score is: " + tries);
             }
         }
         return play;
@@ -148,7 +259,7 @@ public class Main {
 
     private static String hideWord(char[] arr) {
         String w = " ";
-        for (int t = 0; t < arr.length; t++) {
+        for (char el : arr) {
             w = w + "_ ";
         }
         return w;
@@ -158,7 +269,7 @@ public class Main {
         play = welcome();
         while (play != 0) {
             while (play == 16) {
-                play = guessing(tries, play);
+                play = guessing(play);
             }
             play = playSwitch(play);
         }
