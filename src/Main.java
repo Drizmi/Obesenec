@@ -13,19 +13,18 @@ public class Main {
     public static int play;
     private static int difficulty;
     private static int enough = 0;
-    public static char[] word;  //array of charracters from word w0
+    public static char[] word;  //array of characters from word w0
     public static Scanner sc = new Scanner(System.in);
     public static Iterator<String> it = set.iterator();
 
     private static boolean filter(String s) { //if string is only 3 characters long returns true
-        if (s.length() <= 3) return true;
-        else return false;
+        return s.length() <= 3;
     }
 
     private static String transScriptor(String s) {
-        s = s.toLowerCase(); //changes string to lowercase !!!NEFUNGUJE!!!
-        return Normalizer.normalize(s, Normalizer.Form.NFD) //normalizes string !!!NEFUNGUJE!!!
-                .replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with "" !!!NEFUNGUJE!!!
+        s = s.toLowerCase(); //changes string to lowercase
+        return Normalizer.normalize(s, Normalizer.Form.NFD) //normalizes string
+                .replaceAll("\\p{InCOMBINING_DIACRITICAL_MARKS}+", ""); //replaces all diacritics with ""
     }
 
     private static Set<String> makeSet() {
@@ -98,14 +97,13 @@ public class Main {
                     System.out.println("That is not an option.");
             }
         }
-        play = -2;
         return 0;
     }
 
     private static void wordGenerator() {
         int min = 0;
         int max = 22;
-        int l = 0;
+        int l;
         switch (difficulty) {
             case 1:
                 min = 4;
@@ -122,7 +120,7 @@ public class Main {
         }
         w0 = chooseRandom(set);
         l = w0.length();
-        while (min > l && l > max && it.hasNext()) {
+        while (l < min && l > max && it.hasNext()) {
             w0 = it.next();
             l = w0.length();
         }
@@ -139,47 +137,16 @@ public class Main {
                 System.out.println("Too bad, you are out of tries. The word you were guessing was " + w0);
                 System.out.println("If you want to try again, type 'again'. If you want to quit, type 'quit'.");
                 break;
-//                answer = sc.next();
-//                if (answer.equals(n) || answer.equals(a)) {
-//                    play = 16;
-//                } else if (answer.equals(q)) {
-//                    play = -1;
-//                } else {
-//                    System.out.println(answer + " is not a valid command.");
-//                    ++enough;
-//                    if (enough == 100) {
-//                        play = -2;
-//                    }
-//                }
             case 1:
                 System.out.println("So you want to play ? yes/no");
                 break;
-//                answer = sc.next();
-//                if (answer.equals(no)) {
-//                    play = -1;
-//                } else if (answer.equals(yes)) {
-//                    play = 16;
-//                } else {
-//                    System.out.println(answer + " is not a valid command.");
-//                    ++enough;
-//                    if (enough == 100) {
-//                        play = -2;
-//                    }
-//                }
             case -1:
                 System.out.println("Do you really want to quit? y/n");
-//                answer = sc.next();
-//                if (answer.equals(yes)) {
-//                    play = 0;
-//                } else if (answer.equals(no))
-//                    play = 1;
                 break;
-
             case -2:
                 System.out.println("That's enough, you are annoying !!");
                 play = 0;
                 break;
-
             default:
                 System.out.println(answer + " is not a valid command.");
                 ++enough;
@@ -216,7 +183,7 @@ public class Main {
             difficulty = chooseDifficulty();
             tries = 16;
         }
-        while (tries > 0 && play != 3 && play != -2) {
+        while (tries > 0 && play != 3) {
             if (tries == 16) {
                 wordGenerator();
                 --tries;
