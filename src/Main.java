@@ -11,7 +11,7 @@ public class Main {
     private static String answer;    //input
     private static Set<String> set = makeSet();
     public static int play;
-    private static int difficulty;
+//    private static int difficulty;
     private static int enough = 0;
     public static char[] word;  //array of characters from word w0
     public static Scanner sc = new Scanner(System.in);
@@ -82,48 +82,48 @@ public class Main {
         return -2;
     }
 
-    private static int chooseDifficulty() {
-        System.out.println("Choose your difficulty (easy/medium/hard):");
-        while (enough < 100) {
-            switch (sc.next()) {
-                case "easy":
-                    return 1;
-                case "medium":
-                    return 2;
-                case "hard":
-                    return 3;
-                default:
-                    ++enough;
-                    System.out.println("That is not an option.");
-            }
-        }
-        return 0;
-    }
+//    private static int chooseDifficulty() {
+//        System.out.println("Choose your difficulty (easy/medium/hard):");
+//        while (enough < 100) {
+//            switch (sc.next()) {
+//                case "easy":
+//                    return 1;
+//                case "medium":
+//                    return 2;
+//                case "hard":
+//                    return 3;
+//                default:
+//                    ++enough;
+//                    System.out.println("That is not an option.");
+//            }
+//        }
+//        return 0;
+//    }
 
     private static void wordGenerator() {
-        int min = 0;
-        int max = 22;
-        int l;
-        switch (difficulty) {
-            case 1:
-                min = 4;
-                max = 9;
-                break;
-            case 2:
-                min = 10;
-                max = 16;
-                break;
-            case 3:
-                min = 17;
-                max = 22;
-                break;
-        }
+//        int min = 0;
+//        int max = 22;
+//        int l;
+//        switch (difficulty) {
+//            case 1:
+//                min = 4;
+//                max = 9;
+//                break;
+//            case 2:
+//                min = 10;
+//                max = 16;
+//                break;
+//            case 3:
+//                min = 17;
+//                max = 22;
+//                break;
+//        }
         w0 = chooseRandom(set);
-        l = w0.length();
-        while (l < min && l > max && it.hasNext()) {
-            w0 = it.next();
-            l = w0.length();
-        }
+//        l = w0.length();
+//        while (l < min && l > max && it.hasNext()) {
+//            w0 = it.next();
+//            l = w0.length();
+//        }
         word = (w0).toCharArray();   //array of characters of word
         w1 = hideWord(word);  //word in format _ _ _ _ _ ...
     }
@@ -151,7 +151,7 @@ public class Main {
                 System.out.println(answer + " is not a valid command.");
                 ++enough;
                 if (enough == 100) {
-                    play = -2;
+                    play = 0;
                 }
                 break;
         }
@@ -172,6 +172,7 @@ public class Main {
                 play = 1;
                 break;
             default:
+                play = 30;
                 break;
         }
         return play;
@@ -180,7 +181,7 @@ public class Main {
     private static int guessing(int play) {
         int tries = 0;
         if (play == 16) {
-            difficulty = chooseDifficulty();
+//            difficulty = chooseDifficulty();
             tries = 16;
         }
         while (tries > 0 && play != 3) {
@@ -233,6 +234,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+//        System.out.println(set);
         play = welcome();
         while (play != 0) {
             while (play == 16) {
